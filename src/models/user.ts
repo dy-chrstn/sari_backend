@@ -1,23 +1,6 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
 
-interface UserDoc extends Document {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
-
-interface ProfileDoc extends Document {
-  owner: UserDoc["_id"];
-  name: string;
-  pin: number;
-}
-
-const userSchema: Schema<UserDoc> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+const userSchema= new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -34,7 +17,7 @@ const userSchema: Schema<UserDoc> = new mongoose.Schema({
   },
 });
 
-const profileSchema: Schema<ProfileDoc> = new mongoose.Schema({
+const profileSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -49,8 +32,8 @@ const profileSchema: Schema<ProfileDoc> = new mongoose.Schema({
   },
 });
 
-const UserModel: Model<UserDoc> = mongoose.model("User", userSchema);
-const ProfileModel: Model<ProfileDoc> = mongoose.model(
+const UserModel = mongoose.model("User", userSchema);
+const ProfileModel = mongoose.model(
   "Profile",
   profileSchema
 );

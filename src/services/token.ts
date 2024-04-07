@@ -8,7 +8,7 @@ export const createToken = async (token: string) => {
             token,
             expiresAt
         })
-        return await newToken.save()
+        return newToken.save()
     } catch (error) {
         console.log('Error saving token: ' + error)
         return;

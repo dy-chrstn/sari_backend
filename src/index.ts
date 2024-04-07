@@ -19,10 +19,9 @@ const server = http.createServer(app);
 
 server.listen(port, () => {
   console.log("Server running on http://localhost:" + port);
-//   console.log("Server running on http://192.168.1.31:" + port);
 });
 
-
+//  || "mongodb://localhost:27017/sari"
 const MONGO_URL = process.env.MONGO_URL;
 
 mongoose.set("strictQuery", false);

@@ -99,19 +99,9 @@ export const checkCredentials = async (
   const { email, password } = req.body;
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const mobileNumberRegex = /^(09|\+639)\d{9}$/;
   const passwordRegex = /^.{8,}$/;
 
   if (emailRegex.test(email)) {
-    if (!passwordRegex.test(password)) {
-      return res
-        .status(401)
-        .json({
-          messages: { code: 1, message: "Password must be at least 8 characters" },
-          response: {}
-        });
-    }
-  } else if (mobileNumberRegex.test(email)) {
     if (!passwordRegex.test(password)) {
       return res
         .status(401)
