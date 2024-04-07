@@ -21,6 +21,7 @@ export const getToken = async (req: basicAuth.IBasicAuthedRequest, res: express.
         try {
             const newToken = await createToken(token);
 
+
             return res.status(200).json({
                 messages: {
                     code: 0,

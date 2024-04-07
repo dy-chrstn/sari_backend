@@ -2,11 +2,19 @@ import { UserModel, ProfileModel } from "../models/user";
 
 
 export const findUserByEmail = async (email: string) => {
-  return await UserModel.findOne({ email: email });
+  try{
+    return await UserModel.findOne({ email: email });
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
 export const findUserByUsername = async (username: string) => {
-  return await UserModel.findOne({ username: username });
+  try{
+    return await UserModel.findOne({ username: username });
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
 export const createUser = async (
@@ -37,5 +45,9 @@ export const createProfile = async (
 }
 
 export const findAllProfiles = async (userId: string) => {
-  return await ProfileModel.find({ owner: userId });
+  try{
+    return await ProfileModel.find({ userId: userId });
+  } catch (error) {
+    return console.log(error)
+  }
 }

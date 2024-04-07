@@ -1,6 +1,5 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import mongoose from "mongoose";
 
 import {
   createUser,
@@ -68,14 +67,14 @@ export const loginUser = async (
   res: express.Response
 ) => {
   try {
-    const { usernameOrEmail, password } = req.body;
+    const { username, password } = req.body;
 
     let user =
-      (await findUserByUsername(usernameOrEmail)) ||
-      (await findUserByEmail(usernameOrEmail));
+      (await findUserByUsername(username)) ||
+      (await findUserByEmail(username));
 
     if (!user) {
-      return res.sendStatus(400).json({
+      return res.status(400).json({
         messages: {
           code: 1,
           message: "User not found",
@@ -86,7 +85,7 @@ export const loginUser = async (
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.sendStatus(400).json({
+      return res.status(400).json({
         messages: {
           code: 1,
           message: "Invalid credentials",
@@ -95,15 +94,19 @@ export const loginUser = async (
       });
     }
 
-    return res.sendStatus(200).json({
+    return res.status(200).json({
       messages: {
         code: 0,
         message: "User logged in",
       },
-      response: user,
+      response: {
+        userId: user._id,
+        username: user.username,
+        email: user.email,
+      },
     });
   } catch (error) {
-    return res.sendStatus(500).json({
+    return res.status(500).json({
       messages: {
         code: 1,
         message: "Internal server error",
