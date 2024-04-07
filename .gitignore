@@ -1,5 +1,15 @@
-# Ignore environment files
+# Node modules
+node_modules/
+
+# Environment variables
 .env
 
-# Ignore node_modules directory
-node_modules/
+# Build files
+/build
+
+# Logs
+*.log
+
+# Dependency lock files
+yarn.lock
+package-lock.json
