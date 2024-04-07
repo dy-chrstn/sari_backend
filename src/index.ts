@@ -3,28 +3,32 @@ import express from "express";
 import http from "http";
 import bodyParser from "body-parser";
 import router from "./routers";
+import cors from "cors";
 import mongoose from "mongoose";
+// import socketIO from "socket.io"; // Import the socket.io module
 
-const PORT = process.env.PORT || 3000;
+
+
+const port = process.env.PORT || 3051;
+
 const app = express();
 
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(
-    PORT,
-    () => {
-        console.log(`Server running on port http://localhost:${PORT}`);
-    }
-)
+server.listen(port, () => {
+  console.log("Server running on http://localhost:" + port);
+//   console.log("Server running on http://192.168.1.31:" + port);
+});
 
-const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/sari";
+
+const MONGO_URL = process.env.MONGO_URL;
 
 mongoose.set("strictQuery", false);
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
-// mongoose.connection.once("open", () => console.log("MongoDB connected"));
 
-app.use(router);
+app.use(cors());
+app.use("/", router());
