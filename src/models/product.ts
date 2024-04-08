@@ -18,17 +18,11 @@ const productSchema = new mongoose.Schema({
     srp: {
         type: Number,
     },
-    type:{
+    types:{
         type: Array,
-    },
-    selectedType:{
-        type: Number,
     },
     sizes:{
         type: Array, 
-    },
-    selectedSize:{
-        type: Number,
     },
     prices: {
         type: Array,
