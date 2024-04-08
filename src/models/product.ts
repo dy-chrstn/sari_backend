@@ -21,8 +21,14 @@ const productSchema = new mongoose.Schema({
     type:{
         type: Array,
     },
+    selectedType:{
+        type: Number,
+    },
     sizes:{
         type: Array, 
+    },
+    selectedSize:{
+        type: Number,
     },
     prices: {
         type: Array,
@@ -41,6 +47,9 @@ const productSchema = new mongoose.Schema({
     updatedBy: {
         type: String,
     },
+    description: {
+        type: String,
+    }
 });
 
 export const ProductModel = mongoose.model("Product", productSchema)

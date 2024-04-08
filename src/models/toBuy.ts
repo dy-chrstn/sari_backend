@@ -8,6 +8,12 @@ const toBuySchema = new mongoose.Schema({
     products: {
         type: Array
     },
+    quantity:{
+        type: Number
+    },
+    total: {
+        type: Number
+    },
     createdAt: {
         type: Date,
         default: Date.now,
