@@ -63,3 +63,27 @@ export const findAllProfiles = async (userId: string) => {
     return console.log(error)
   }
 }
+
+export const findProfile = async (profileId: string) => {
+  try{
+    return await ProfileModel.findOne({ _id: profileId });
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
+export const updateUser = async (userId: string, data: any) => {
+  try{
+    return await UserModel.findOneAndUpdate({ _id: userId }, data, { new: true });
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
+export const updateProfile = async (profileId: string, data: any) => {
+  try{
+    return await ProfileModel.findOneAndUpdate({ _id: profileId }, data, { new: true });
+  } catch (error) {
+    return console.log(error)
+  }
+}

@@ -43,11 +43,15 @@ const profileSchema = new mongoose.Schema({
   },
   updatedAt: {
     type: Date,
-    default: Date.now,
   },
 });
 
 userSchema.pre("updateOne", async function (next) {
+  this.set({ updatedAt: Date.now() });
+  next();
+})
+
+profileSchema.pre("updateOne", async function (next) {
   this.set({ updatedAt: Date.now() });
   next();
 })
