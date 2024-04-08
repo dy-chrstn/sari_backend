@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import {
   createUser,
   createProfile,
+  findUserById,
   findUserByEmail,
   findUserByUsername,
   findAllProfiles,
@@ -150,7 +151,21 @@ export const getProfiles = async (
   res: express.Response
 ) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.params.id;
+    console.log(userId)
+
+    const userExists = await findUserById(userId);
+
+    if (!userExists) {
+      return res.status(400).json({
+        messages: {
+          code: 1,
+          message: "User not found",
+        },
+        response: {},
+      });
+    }
+
     const profiles = await findAllProfiles(userId);
     return res.status(200).json({
       messages: {

@@ -1,6 +1,14 @@
 import { UserModel, ProfileModel } from "../models/user";
 
 
+export const findUserById = async (userId: string) => {
+  try{
+    return await UserModel.findOne({ _id: userId });
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
 export const findUserByEmail = async (email: string) => {
   try{
     return await UserModel.findOne({ email: email });
@@ -50,7 +58,7 @@ export const createProfile = async (
 
 export const findAllProfiles = async (userId: string) => {
   try{
-    return await ProfileModel.find({ userId: userId });
+    return await ProfileModel.find({ owner: userId });
   } catch (error) {
     return console.log(error)
   }
