@@ -16,6 +16,14 @@ export const findProductById = async (productId: string) => {
     }
 }
 
+export const findAllProductsById = async (userId: string) => {
+    try {
+        return await ProductModel.find({ userId: userId });
+    } catch (error) {
+        return console.log(error);
+    }
+}
+
 export const updateProductById = async (productId: string, data: any) => {
     try {
         return await ProductModel.findOneAndUpdate({ _id: productId }, data, { new: true });

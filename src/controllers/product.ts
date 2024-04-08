@@ -1,14 +1,12 @@
 import express from "express";
 
-import { createProduct, findProductById, updateProductById, deleteProductById } from "../services/product";
+import { createProduct, findProductById, findAllProductsById, updateProductById, deleteProductById } from "../services/product";
 import { findUserById } from "../services/user";
 
 export const registerProduct = async (req: express.Request, res: express.Response) => {
     try {
         const userId = req.params.id;
         const { name, dp, srp, types, sizes, prices, createdBy, updatedBy, description  } = req.body;
-
-        console.log("Types: ", types);
 
         const userExists = await findUserById(userId);
         if (!userExists) {
@@ -53,9 +51,10 @@ export const registerProduct = async (req: express.Request, res: express.Respons
     }
 };
 
-export const getProducts = async (req: express.Request, res: express.Response) => {
+export const getProduct = async (req: express.Request, res: express.Response) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
+        const productId = req.params.productId;
 
         const userExists = await findUserById(userId);
         if (!userExists) {
@@ -68,11 +67,46 @@ export const getProducts = async (req: express.Request, res: express.Response) =
             });
         }
 
-        const products = await findProductById(userId);
+        const product = await findProductById(productId);
         return res.status(200).json({
             messages: {
                 code: 0,
-                message: "Product retrieved",
+                message: "Product found",
+            },
+            response: product,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            messages: {
+                code: 1,
+                message: "Internal server error",
+            },
+            response: {},
+        });
+    }
+}
+
+export const getProducts = async (req: express.Request, res: express.Response) => {
+    try {
+        const userId = req.params.userId;
+
+        const userExists = await findUserById(userId);
+        if (!userExists) {
+            return res.status(400).json({
+                messages: {
+                    code: 1,
+                    message: "User not found",
+                },
+                response: {},
+            });
+        }
+
+        const products = await findAllProductsById(userId);
+
+        return res.status(200).json({
+            messages: {
+                code: 0,
+                message: "Products retrieved",
             },
             response: products,
         });
