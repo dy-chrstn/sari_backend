@@ -37,11 +37,15 @@ export const createProfile = async (
   name: string,
   pin: number
 ) => {
-  return await new ProfileModel({
-    userId,
-    name,
-    pin
-  }).save();
+  try{
+    return await new ProfileModel({
+      owner: userId,
+      name,
+      pin
+    }).save();
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
 export const findAllProfiles = async (userId: string) => {

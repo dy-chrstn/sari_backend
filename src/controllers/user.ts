@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import {
   createUser,
+  createProfile,
   findUserByEmail,
   findUserByUsername,
   findAllProfiles,
@@ -115,6 +116,34 @@ export const loginUser = async (
     });
   }
 };
+
+export const registerProfile = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const userId = req.params.id;
+    const { name, pin } = req.body;
+
+    const profile = await createProfile(userId, name, pin);
+
+    return res.status(200).json({
+      messages: {
+        code: 0,
+        message: "Profile created",
+      },
+      response: profile,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      messages: {
+        code: 1,
+        message: "Internal server error",
+      },
+      response: {},
+    });
+  }
+}
 
 export const getProfiles = async (
   req: express.Request,
