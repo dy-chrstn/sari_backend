@@ -150,6 +150,17 @@ export const updateProduct = async (req: express.Request, res: express.Response)
         }
 
         const product = await updateProductById(productId, productData);
+
+        if (!product) {
+            return res.status(500).json({
+                messages: {
+                    code: 1,
+                    message: "Internal server error",
+                },
+                response: {},
+            });
+        }
+        
         return res.status(200).json({
             messages: {
                 code: 0,
