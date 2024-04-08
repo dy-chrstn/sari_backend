@@ -7,7 +7,10 @@ import {
   findUserById,
   findUserByEmail,
   findUserByUsername,
+  findProfile,
   findAllProfiles,
+  updateUser,
+  updateProfile
 } from "../services/user";
 
 export const registerUser = async (
@@ -152,7 +155,6 @@ export const getProfiles = async (
 ) => {
   try {
     const userId = req.params.id;
-    console.log(userId)
 
     const userExists = await findUserById(userId);
 
@@ -185,4 +187,125 @@ export const getProfiles = async (
   }
 };
 
+export const updateUserAcc = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const userId = req.params.id;
+    const { username, email, password } = req.body;
+    const user = await findUserById(userId);
+
+    if (!user) {
+      return res.status(400).json({
+        messages: {
+          code: 1,
+          message: "User not found",
+        },
+        response: {},
+      });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      username,
+      email,
+      hashPassword,
+    };
+
+    const updatedUser = await updateUser(userId, newUser);
+
+    if (!updatedUser) {
+      return res.status(500).json({
+        messages: {
+          code: 1,
+          message: "Failed to update user",
+        },
+        response: {},
+      });
+    }
+
+    return res.status(200).json({
+      messages: {
+        code: 0,
+        message: "User updated",
+      },
+      response: {
+        userId: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      messages: {
+        code: 1,
+        message: "Internal server error",
+      },
+      response: {},
+    });
+  }
+}
+
+export const updateProfileAcc = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const userId = req.params.id;
+    const { name, pin } = req.body;
+    const profile = await findProfile(userId);
+
+    if (!profile) {
+      return res.status(400).json({
+        messages: {
+          code: 1,
+          message: "Profile not found",
+        },
+        response: {},
+      });
+    }
+
+    const newProfile = {
+      name,
+      pin
+    };
+
+    const updatedProfile = await updateProfile(userId, newProfile);
+
+    if (!updatedProfile) {
+      return res.status(500).json({
+        messages: {
+          code: 1,
+          message: "Failed to update profile",
+        },
+        response: {},
+      });
+    }
+
+
+    return res.status(200).json({
+      messages: {
+        code: 0,
+        message: "Profile updated",
+      },
+      response: {
+        _id: updatedProfile._id,
+        owner: updatedProfile.owner,
+        name: updatedProfile.name,
+        pin: updatedProfile.pin
+      },
+    });
+    
+  } catch (error) {
+    return res.status(500).json({
+      messages: {
+        code: 1,
+        message: "Internal server error",
+      },
+      response: {},
+    });
+  }
+}
 
