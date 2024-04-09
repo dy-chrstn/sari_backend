@@ -15,13 +15,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("Sari Backend");
+});
+
 const server = http.createServer(app);
 
 server.listen(port, () => {
   console.log("Server running on http://localhost:" + port);
 });
 
-//  || "mongodb://localhost:27017/sari"
 const MONGO_URL = process.env.MONGO_URL;
 
 mongoose.set("strictQuery", false);
