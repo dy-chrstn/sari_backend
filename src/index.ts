@@ -16,7 +16,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Sari Backend");
+  res.json("Sari Backend");
 });
 
 const server = http.createServer(app);
