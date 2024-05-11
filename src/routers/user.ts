@@ -13,8 +13,9 @@ import { tokenAuth, checkCredentials } from "../middleware/index";
 export default (router: express.Router) => {
   router.post("/register", tokenAuth, checkCredentials, registerUser);
   router.post("/login", tokenAuth, loginUser);
-  router.post("/registerProfile/:id", tokenAuth, registerProfile);
-  router.get("/profiles/:id", tokenAuth, getProfiles);
-  router.patch("/updateUserAcc/:id", tokenAuth, updateUserAcc);
-  router.patch("/updateProfileAcc/:id", tokenAuth, updateProfileAcc);
+  router.post("/profile/register/:id", tokenAuth, registerProfile);
+  router.get("/profile/retrieve/:id", tokenAuth, getProfiles);
+  router.patch("/business/update/:id", tokenAuth, updateUserAcc);
+  router.patch("/profile/update/:id", tokenAuth, updateProfileAcc);
 };
+  

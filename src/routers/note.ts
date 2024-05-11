@@ -4,9 +4,9 @@ import { registerNote, getNote, getAllNotes, updateNote, deleteNote } from "../c
 import { tokenAuth } from "../middleware/index";
 
 export default (router: express.Router) => {
-    router.post("/registerNote/:id", tokenAuth, registerNote);
-    router.get("/getNote/:userId/:noteId", tokenAuth, getNote);
-    router.get("/getAllNotes/:userId", tokenAuth, getAllNotes);
-    router.patch("/updateNote/:userId/:noteId", tokenAuth, updateNote);
-    router.delete("/deleteNote/:userId/:noteId", tokenAuth, deleteNote);
+    router.post("/note/register/:id", tokenAuth, registerNote);
+    router.get("/note/get/:userId/:noteId", tokenAuth, getNote);
+    router.get("/note/getAll/:userId", tokenAuth, getAllNotes);
+    router.patch("/note/update/:userId/:noteId", tokenAuth, updateNote);
+    router.delete("/note/delete/:userId/:noteId", tokenAuth, deleteNote);
 }

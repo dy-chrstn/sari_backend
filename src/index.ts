@@ -1,13 +1,11 @@
+import mongoose from "mongoose";
 require("dotenv").config();
 import express from "express";
 import http from "http";
 import bodyParser from "body-parser";
 import router from "./routers";
 import cors from "cors";
-import mongoose from "mongoose";
 // import socketIO from "socket.io"; // Import the socket.io module
-
-
 
 const port = process.env.PORT || 3051;
 

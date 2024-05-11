@@ -4,9 +4,9 @@ import { registerProduct, getProduct, getProducts, updateProduct, deleteProduct 
 import { tokenAuth } from "../middleware/index";
 
 export default (router: express.Router) => {
-    router.post("/registerProduct/:id", tokenAuth, registerProduct);
-    router.get("/getProduct/:userId/:productId", tokenAuth, getProduct);
-    router.get("/getAllProducts/:userId", tokenAuth, getProducts);
-    router.patch("/updateProduct/:productId", tokenAuth, updateProduct);
-    router.delete("/deleteProduct/:productId", tokenAuth, deleteProduct);
+    router.post("/product/register/:id", tokenAuth, registerProduct);
+    router.get("/product/get/:userId/:productId", tokenAuth, getProduct);
+    router.get("/product/getAll/:userId", tokenAuth, getProducts);
+    router.patch("/product/update/:productId", tokenAuth, updateProduct);
+    router.delete("/product/delete/:productId", tokenAuth, deleteProduct);
 }
