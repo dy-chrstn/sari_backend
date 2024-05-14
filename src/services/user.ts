@@ -87,3 +87,19 @@ export const updateProfile = async (profileId: string, data: any) => {
     return console.log(error)
   }
 }
+
+export const deleteUser = async (userId: string) => {
+  try{
+    return await UserModel.findOneAndDelete({ _id: userId });
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
+export const deleteProfile = async (profileId: string) => {
+  try{
+    return await ProfileModel.findOneAndDelete({ _id: profileId });
+  } catch (error) {
+    return console.log(error)
+  }
+}
