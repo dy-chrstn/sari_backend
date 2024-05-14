@@ -430,7 +430,7 @@ export const getUserByUsername = async (req: express.Request, res: express.Respo
     return res.status(200).json({
       messages: {
         code: 0,
-        message: "username already exist",
+        message: "Username already exist",
       },
       response: {
         _id: user._id,
