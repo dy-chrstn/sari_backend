@@ -311,7 +311,7 @@ export const updateProfileAcc = async (
   }
 }
 
-export const deleteUserAcc = async (
+export const deleteBusinessAcc = async (
   req: express.Request,
   res: express.Response
 ) => {
