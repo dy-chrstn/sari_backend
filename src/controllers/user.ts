@@ -421,7 +421,7 @@ export const getUserByUsername = async (req: express.Request, res: express.Respo
       return res.status(400).json({
         messages: {
           code: 1,
-          message: "User not found",
+          message: "Username does not exist",
         },
         response: {},
       });
@@ -430,7 +430,7 @@ export const getUserByUsername = async (req: express.Request, res: express.Respo
     return res.status(200).json({
       messages: {
         code: 0,
-        message: "User found",
+        message: "username already exist",
       },
       response: {
         _id: user._id,
