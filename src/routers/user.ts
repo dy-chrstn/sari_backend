@@ -17,7 +17,7 @@ export default (router: express.Router) => {
   // business acc
   router.post("/login", tokenAuth, loginUser);
   router.post("/register", tokenAuth, checkCredentials, registerUser);
-  router.post("/business/find/:username", tokenAuth, getUserByUsername);
+  router.get("/business/find/:username", tokenAuth, getUserByUsername);
   router.patch("/business/update/:id", tokenAuth, updateUserAcc);
   router.delete("/business/delete/:id", tokenAuth, deleteBusinessAcc);
   
