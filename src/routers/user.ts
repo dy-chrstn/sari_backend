@@ -8,18 +8,19 @@ import {
   updateUserAcc,
   updateProfileAcc,
   getUserByUsername,
+  getUserByEmail,
   deleteProfileAcc,
   deleteBusinessAcc
 } from "../controllers/user";
 import { tokenAuth, checkCredentials } from "../middleware/index";
-import { findUserByEmail } from "services/user";
+
 
 export default (router: express.Router) => {
   // business acc
   router.post("/login", tokenAuth, loginUser);
   router.post("/register", tokenAuth, checkCredentials, registerUser);
   router.get("/business/findByUsername/:username", tokenAuth, getUserByUsername);
-  router.get("/business/findByEmail/:email", tokenAuth, findUserByEmail);
+  router.get("/business/findByEmail/:email", tokenAuth, getUserByEmail);
   router.patch("/business/update/:id", tokenAuth, updateUserAcc);
   router.delete("/business/delete/:id", tokenAuth, deleteBusinessAcc);
   
