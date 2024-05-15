@@ -448,3 +448,39 @@ export const getUserByUsername = async (req: express.Request, res: express.Respo
     });
   }
 }
+
+export const getUserByEmail = async (req: express.Request, res: express.Response) => {
+  try {
+    const email = req.params.email;
+    const user = await findUserByEmail(email);
+    if (!user) {
+      return res.status(400).json({
+        messages: {
+          code: 1,
+          message: "Email does not exist",
+        },
+        response: {},
+      });
+    }
+
+    return res.status(200).json({
+      messages: {
+        code: 0,
+        message: "Email already exist",
+      },
+      response: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      messages: {
+        code: 1,
+        message: "Internal server error",
+      },
+      response: {},
+    });
+  }
+}
