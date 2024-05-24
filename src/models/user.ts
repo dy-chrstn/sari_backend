@@ -34,7 +34,7 @@ const profileSchema = new mongoose.Schema({
     type: String,
   },
   pin: {
-    type: Number,
+    type: String,
     required: true,
   },
   createdAt: {
