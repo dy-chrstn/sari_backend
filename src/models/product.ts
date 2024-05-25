@@ -12,10 +12,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dp: {
-        type: Number,  
-    },
-    srp: {
+    stock:{
         type: Number,
     },
     types:{
@@ -26,6 +23,9 @@ const productSchema = new mongoose.Schema({
     },
     prices: {
         type: Array,
+    },
+    dp:{
+        type: Array
     },
     createdAt: {
         type: Date,
