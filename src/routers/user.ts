@@ -17,8 +17,8 @@ import { tokenAuth, checkCredentials } from "../middleware/index";
 
 export default (router: express.Router) => {
   // business acc
-  router.post("/login", tokenAuth, loginUser);
-  router.post("/register", tokenAuth, checkCredentials, registerUser);
+  router.post("/business/login", tokenAuth, loginUser);
+  router.post("/business/register", tokenAuth, checkCredentials, registerUser);
   router.get("/business/findByUsername/:username", tokenAuth, getUserByUsername);
   router.get("/business/findByEmail/:email", tokenAuth, getUserByEmail);
   router.patch("/business/update/:id", tokenAuth, updateUserAcc);
